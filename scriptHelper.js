@@ -1,19 +1,20 @@
 // Write your helper functions here!
 require('isomorphic-fetch');
 
-function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
+function addDestinationInfo(document, name, diameter, star, distance, moons, image) {
    // Here is the HTML formatting for our mission target div.
-   /*
-                <h2>Mission Destination</h2>
-                <ol>
-                    <li>Name: </li>
-                    <li>Diameter: </li>
-                    <li>Star: ${star}</li>
-                    <li>Distance from Earth: </li>
-                    <li>Number of Moons: </li>
-                </ol>
-                <img src="">
-   */
+   
+   let targets= document.getElementById("missionTarget");
+   //let target= randomPlanet
+   targets.innerHTML= `<h2>Mission Destination</h2>
+   <ol>
+       <li>Name: ${name}</li>
+       <li>Diameter: ${diameter}</li>
+       <li>Star: ${star}</li>
+       <li>Distance from Earth: ${distance}</li>
+       <li>Number of Moons: ${moons}</li>
+   </ol>
+   <img src="${image}">`
 }
 
 function validateInput(testInput) {
@@ -27,9 +28,12 @@ function validateInput(testInput) {
         return "Not a Number";
     } else if (isNaN(testInput) === false ){
         return "Number";
+    } else if (testInput.includes(".")){
+        return "dot";
+    }
     
 }
-}
+
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   //console.log("callingFormSubmission")
@@ -47,14 +51,12 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
     if (validateInput(pilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(copilot) === "Empty" || validateInput(cargoLevel)=== "Empty") {
         alert("All fields are required");
-    }
-    if(validateInput(fuelLevel)=== "Not a Number" ||  validateInput(cargoLevel)=== "Not a Number") {
+    } else if(validateInput(fuelLevel)=== "Not a Number" ||  validateInput(cargoLevel)=== "Not a Number") {
         alert("Please enter valid number.");
-    } 
-        
-        if(validateInput(pilot) === "Number" ||  validateInput(copilot) === "Number" ){
+    } else if(validateInput(pilot) === "Number" ||  validateInput(copilot) === "Number" || validateInput(copilot) === "dot" && validateInput(pilot) === "."){
+       
         alert("Please enter valid name.")
-    
+    // validateInput(typeof pilot) !== "string" || validateInput(typeof copilot) !== "string"
     
 
     list.style.visibility= "hidden";
@@ -118,23 +120,11 @@ console.log(planetsReturned)
 
 function pickPlanet(planets) {
     
-   //let planets= myFetch()
-   
-   // let targets= document.getElementById("missionTarget");
     let random= Math.floor(Math.random() * planets.length);
     let target= planets[random];
     console.log(target)
     return target;
     
-    //targets.innerHTML= `<h2>Mission Destination</h2>
-   // <ol>
-   // <li>Name: ${target.name}</li>
-   // <li>Diameter: ${target.diameter}</li>
-   // <li>Star: ${target.star}</li>
-   // <li>Distance from Earth: ${target.distance}</li>
-   // <li>Number of Moons: ${target.moons}</li>
-   // </ol>
-   // <img src="${target.image}"> `
     }
 
 
