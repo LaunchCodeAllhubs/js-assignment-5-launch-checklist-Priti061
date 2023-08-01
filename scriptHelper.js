@@ -2,10 +2,9 @@
 require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, image) {
-   // Here is the HTML formatting for our mission target div.
    
    let targets= document.getElementById("missionTarget");
-   //let target= randomPlanet
+   
    targets.innerHTML= `<h2>Mission Destination</h2>
    <ol>
        <li>Name: ${name}</li>
@@ -17,17 +16,15 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
    <img src="${image}">`
 }
 
+
 function validateInput(testInput) {
-    //let value= testInput.value;
-    //console.log(testInput)
-    //console.log("Test Input",testInput)
-    //console.log("value= ", value)
+    
     if (testInput === ""){
         return "Empty";
     } else if (isNaN(testInput) === true ){
         return "Not a Number";
     } else if (isNaN(testInput) === false ){
-        return "Number";
+        return "Is a Number";
     } else if (testInput.includes(".")){
         return "dot";
     }
@@ -36,37 +33,30 @@ function validateInput(testInput) {
 
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-  //console.log("callingFormSubmission")
-    
+  
     let launchStatus= document.getElementById('launchStatus');
     let fuelStatus= document.getElementById("fuelStatus");
     let cargoStatus= document.getElementById("cargoStatus");
     let pilotStatus= document.getElementById("pilotStatus");
     let copilotStatus= document.getElementById("copilotStatus");
     let ready= true;
-    //console.log("Pilot is ", validateInput(pilot))
-    //console.log("Copilot is ", validateInput(copilot))
-   // console.log("fuelLevel is ", validateInput(fuelLevel))
-    //console.log("cargoLevel is ", validateInput(cargoLevel))
-
+    
     if (validateInput(pilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(copilot) === "Empty" || validateInput(cargoLevel)=== "Empty") {
         alert("All fields are required");
     } else if(validateInput(fuelLevel)=== "Not a Number" ||  validateInput(cargoLevel)=== "Not a Number") {
         alert("Please enter valid number.");
-    } else if(validateInput(pilot) === "Number" ||  validateInput(copilot) === "Number" || validateInput(copilot) === "dot" && validateInput(pilot) === "."){
+    } else if(validateInput(pilot) === "Is a Number" ||  validateInput(copilot) === "Is a Number" || validateInput(copilot) === "dot" && validateInput(pilot) === "."){
        
         alert("Please enter valid name.")
-    // validateInput(typeof pilot) !== "string" || validateInput(typeof copilot) !== "string"
     
-
     list.style.visibility= "hidden";
     launchStatus.style.color= "black";
     launchStatus.innerHTML= "Awaiting Information Before Launch";
 
     } else {
         list.style.visibility= "visible";
-        pilotStatus.innerHTML= `"Pilot ${pilot} is ready for launch"`;
-        copilotStatus.innerHTML= `"Co-pilot ${copilot} is ready for launch"`;
+        pilotStatus.innerHTML= `'Pilot ${pilot} is ready for launch'`;
+        copilotStatus.innerHTML= `'Co-pilot ${copilot} is ready for launch'`;
 
     }
 
@@ -88,13 +78,13 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
    
 
   if(ready){
-    launchStatus.style.color= "green";
-   launchStatus.innerHTML= "Shuttle is ready for launch";
+    launchStatus.style.color= "rgb(65, 159, 106";
+   launchStatus.innerHTML= "Shuttle is Ready for Launch";
 
    } else{
     list.style.visibility= "visible";
-    launchStatus.style.color= "red";
-    launchStatus.innerHTML= "Shuttle Not Ready For Launch";
+    launchStatus.style.color= "rgb(199, 37, 78)";
+    launchStatus.innerHTML= "Shuttle Not Ready for Launch";
    }
     
 
@@ -109,10 +99,8 @@ async function myFetch() {
     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
         return response.json()
         
-            //planetsReturned= data;
            console.log(planetsReturned)
 
-        //})
         });
 console.log(planetsReturned)
     return planetsReturned;
