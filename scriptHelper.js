@@ -44,8 +44,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     if (validateInput(pilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(copilot) === "Empty" || validateInput(cargoLevel)=== "Empty") {
         alert("All fields are required");
     } else if(validateInput(fuelLevel)=== "Not a Number" ||  validateInput(cargoLevel)=== "Not a Number") {
-        alert("Please enter valid number.");
-    } else if(validateInput(pilot) === "Is a Number" ||  validateInput(copilot) === "Is a Number" || validateInput(copilot) === "dot" && validateInput(pilot) === "."){
+        alert("Make sure to enter valid information for each field.");
+    } else if(validateInput(pilot) === "Is a Number" ||  validateInput(copilot) === "Is a Number" || validateInput(copilot) === "dot" || validateInput(pilot) === "dot"){
        
         alert("Please enter valid name.")
     
@@ -55,9 +55,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
     } else {
         list.style.visibility= "visible";
-        pilotStatus.innerHTML= String(`Pilot ${pilot} is ready for launch`) +(".") ;
-        copilotStatus.innerHTML= String(`Co-pilot ${copilot} is ready for launch`) +(".") ;
-
+        pilotStatus.innerHTML= `Pilot ${pilot} is ready for launch`.concat(".") ;
+        copilotStatus.innerHTML= `Co-pilot ${copilot} is ready for launch`.concat(".") ;
     }
 
    if(fuelLevel < 10000) {
@@ -75,24 +74,19 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     cargoStatus.innerHTML= "Cargo mass low enough for launch";
    }
 
-   
-
   if(ready){
     launchStatus.style.color= "rgb(65, 159, 106";
    launchStatus.innerHTML= "Shuttle is Ready for Launch";
    
-
    } else{
     list.style.visibility= "visible";
     launchStatus.style.color= "rgb(199, 37, 78)";
     launchStatus.innerHTML= "Shuttle Not Ready for Launch";
-   }
-    
-
-
-    
+   }   
    
 }
+
+
 
 async function myFetch() {
     let planetsReturned;
@@ -100,19 +94,17 @@ async function myFetch() {
     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
         return response.json()
         
-           console.log(planetsReturned)
-
         });
-console.log(planetsReturned)
+
     return planetsReturned;
 }
 
+
+
 function pickPlanet(planets) {
-    
     let random= Math.floor(Math.random() * planets.length);
     let target= planets[random];
-    console.log(target)
-    return target;
+   return target;
     
     }
 
