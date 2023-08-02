@@ -55,8 +55,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
     } else {
         list.style.visibility= "visible";
-        pilotStatus.innerHTML= `Pilot ${pilot} is ready for launch`.concat(".") ;
-        copilotStatus.innerHTML= `Co-pilot ${copilot} is ready for launch`.concat(".") ;
+        pilotStatus.innerHTML= (`Pilot ${pilot} is ready for launch`).concat(".") ;
+        copilotStatus.innerHTML= (`Co-pilot ${copilot} is ready for launch`).concat(".") ;
     }
 
    if(fuelLevel < 10000) {
