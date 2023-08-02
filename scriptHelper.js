@@ -25,8 +25,7 @@ function validateInput(testInput) {
         return "Not a Number";
     } else if (isNaN(testInput) === false ){
         return "Is a Number";
-    } else if (testInput.includes(".")){
-        return "dot";
+    
     }
     
 }
@@ -45,7 +44,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         alert("All fields are required");
     } else if(validateInput(fuelLevel)=== "Not a Number" ||  validateInput(cargoLevel)=== "Not a Number") {
         alert("Make sure to enter valid information for each field.");
-    } else if(validateInput(pilot) === "Is a Number" ||  validateInput(copilot) === "Is a Number" || validateInput(copilot) === "dot" || validateInput(pilot) === "dot"){
+    } else if(validateInput(pilot) === "Is a Number" ||  validateInput(copilot) === "Is a Number"){
        
         alert("Please enter valid name.")
     
@@ -55,8 +54,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
     } else {
         list.style.visibility= "visible";
-        pilotStatus.innerHTML= (`Pilot ${pilot} is ready for launch`).concat(".") ;
-        copilotStatus.innerHTML= (`Co-pilot ${copilot} is ready for launch`).concat(".") ;
+        pilotStatus.innerHTML= `Pilot ${pilot} is ready for launch`;
+        copilotStatus.innerHTML= `Co-pilot ${copilot} is ready for launch`;
     }
 
    if(fuelLevel < 10000) {
